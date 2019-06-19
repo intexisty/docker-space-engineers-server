@@ -5,7 +5,7 @@ wine_home="/home/wine/.wine/drive_c/users/wine"
 wine_appdata="${wine_home}/Application Data"
 
 # space engineers
-se_home="${wine_home}/DedicatedServer"
+se_home="${wine_home}/DedicatedServer64"
 se_appdata="${wine_appdata}/SpaceEngineersDedicated"
 
 # entry point
