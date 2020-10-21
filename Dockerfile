@@ -25,20 +25,28 @@ ENV WINEDEBUG -all
 ENV DEBIAN_FRONTEND noninteractive
 
 RUN dpkg --add-architecture i386 && \
+    # Configuring sources
+    echo "deb http://deb.debian.org/debian buster main contrib non-free" > /etc/apt/sources.list && \
+    echo "deb http://security.debian.org/debian-security buster/updates main contrib non-free" >> /etc/apt/sources.list && \
+    echo "deb http://deb.debian.org/debian buster-updates main contrib non-free" >> /etc/apt/sources.list && \
+    echo "deb http://deb.debian.org/debian buster-backports main contrib non-free" >> /etc/apt/sources.list && \
 
     # Updating and upgrading
     apt-get update && \
     apt-get upgrade -y && \
+    apt-get install -y gpg-agent && \
+    apt-key adv --keyserver keyserver.ubuntu.com --recv-keys A2166B8DE8BDC3367D1901C11EE2FF37CA8DA16B && \
+    apt-get update && \
 
     apt-get install -y --no-install-recommends software-properties-common && \
-    apt-get install -y --no-install-recommends unzip wget gpg-agent apt-transport-https && \
+    add-apt-repository ppa:apt-fast/stable && \
+    apt-get update &&\
+    apt-get -y install apt-fast && \
+    apt-fast install -y --no-install-recommends unzip wget gpg-agent apt-transport-https && \
 
     # Installation of wine, winetricks and temporary xvfb
-    apt-get install -y --install-recommends wine && \
-    apt-get install -y --no-install-recommends winetricks xvfb && \
-
-    # Installation of winbind to stop ntlm error messages
-    apt-get install -y --no-install-recommends winbind && \
+    apt-fast install -y --install-recommends wine && \
+    apt-fast install -y --no-install-recommends winetricks xvfb winbind xauth && \
 
     # Installation of winetricks tricks as wine user
     su -p -l wine -c winecfg && \
@@ -49,21 +57,21 @@ RUN dpkg --add-architecture i386 && \
     su -p -l wine -c 'xvfb-run -a winetricks -q xna40' && \
     su -p -l wine -c 'xvfb-run -a winetricks d3dx9' && \
     su -p -l wine -c 'xvfb-run -a winetricks -q directplay' && \
-
+    
     # Installation of git, build tools, and sigmap
-    apt-get install -y --no-install-recommends build-essential git-core && \
+    apt-fast install -y --no-install-recommends build-essential git-core && \
     git clone https://github.com/marjacob/sigmap.git && \
     (cd sigmap && exec make) && \
     install sigmap/bin/sigmap /usr/local/bin/sigmap && \
     rm -rf sigmap/ && \
 
     # Cleaning up
-    apt-get autoremove -y --purge build-essential git-core && \
-    apt-get autoremove -y --purge software-properties-common && \
-    apt-get autoremove -y --purge wget gpg-agent apt-transport-https && \
-    apt-get autoremove -y --purge xvfb && \
-    apt-get autoremove -y --purge && \
-    apt-get clean -y && \
+    apt-fast autoremove -y --purge build-essential git-core && \
+    apt-fast autoremove -y --purge software-properties-common && \
+    apt-fast autoremove -y --purge wget gpg-agent apt-transport-https && \
+    apt-fast autoremove -y --purge xvfb && \
+    apt-fast autoremove -y --purge && \
+    apt-fast clean -y && \
     rm -rf /home/wine/.cache && \
     rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
