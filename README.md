@@ -66,5 +66,4 @@ See [here](https://github.com/marjacob/sigmap "sigmap") for more information.
 ## Credits
 The original `Dockerfile` was written by [webanck](https://github.com/webanck "webanck") and can be found [here](https://github.com/webanck/docker-wine-steam "Steam with Docker").
 
-This repo has been adapted from [marjacob](https://github.com/marjacob "marjacob")'s efforts.
-This repo has been adapted from [ChipWolf](https://github.com/ChipWolf)'s efforts
+This repo has been adapted from [marjacob](https://github.com/marjacob "marjacob")'s & [ChipWolf](https://github.com/ChipWolf)'s efforts
