@@ -40,7 +40,6 @@ RUN dpkg --add-architecture i386 && \
 
     # Installation of wine, winetricks and temporary xvfb
     apt-get install -y --install-recommends winehq-stable && \
-    ln -s /opt/wine-stable/bin/wine64 /bin/wine && \
     apt-get install -y --no-install-recommends winetricks xvfb && \
 
     # Installation of winbind to stop ntlm error messages
