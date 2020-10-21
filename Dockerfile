@@ -4,7 +4,7 @@
 # Adapted from work by marjacob
 # https://github.com/marjacob/se-server
 
-FROM ubuntu
+FROM debian
 MAINTAINER Chip Wolf <hello@chipwolf.uk> 
 
 # Creating the wine user and setting up dedicated non-root environment.
