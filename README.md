@@ -1,7 +1,6 @@
-# Space Engineers on Linux
-Docker container for running a Space Engineers server
-There is no public prebuilt container image because of copyright restrictions
-These instructions will guide you to configure the environment and build your own container
+# Space Engineers Server on Linux
+This is a docker container suitable for running a Space Engineers server.
+There is no public prebuilt container image because of microsoft copyright restrictions.
 
 ## Setup
 - Create the required directory structure.
@@ -49,7 +48,7 @@ sudo chown -R 256:256 space-engineers
 space-engineers/docker/build.sh
 ```
 
-#### Starting the server
+## Running
 
 ```bash
 docker run -it -p 27016:27016/udp -v $(pwd)/games/space-engineers/data:/host --rm --name space-engineers saiban/space-engineers
@@ -60,7 +59,7 @@ docker run -it -p 27016:27016/udp -v $(pwd)/games/space-engineers/data:/host --r
 ---
 
 ## Additional notes
-Running Space Engineers this way requires a helper program called `sigmap` which was developed for this use specifically. It is cloned and built by the Dockerfile and should not add any additional overhead. Because Space Engineers ignores `SIGTERM` which is sent by Docker to shut down the service, `sigmap` catches that signal and forwards `SIGINT` to Space Engineers.
+Running SES this way requires a program called `sigmap`, Space Engineers ignores `SIGTERM` when it is sent by docker to stop the service, `sigmap` catches that signal and forwards a `SIGINT` to Space Engineers.
 
 See [here](https://github.com/marjacob/sigmap "sigmap") for more information.
 
@@ -68,3 +67,4 @@ See [here](https://github.com/marjacob/sigmap "sigmap") for more information.
 The original `Dockerfile` was written by [webanck](https://github.com/webanck "webanck") and can be found [here](https://github.com/webanck/docker-wine-steam "Steam with Docker").
 
 This repo has been adapted from [marjacob](https://github.com/marjacob "marjacob")'s efforts.
+This repo has been adapted from [ChipWolf](https://github.com/ChipWolf)'s efforts
