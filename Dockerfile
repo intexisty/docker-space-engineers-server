@@ -3,9 +3,11 @@
 # https://github.com/webanck/docker-wine-steam
 # Adapted from work by marjacob
 # https://github.com/marjacob/se-server
+# Adapted from work done by chipwolf
+# https://github.com/ChipWolf/docker-space-engineers-server
 
 FROM debian
-MAINTAINER Chip Wolf <hello@chipwolf.uk> 
+MAINTAINER Aidan J Culley <culley.aidan@gmail.com> 
 
 # Creating the wine user and setting up dedicated non-root environment.
 RUN useradd -u 256 -d /home/wine -m -s /bin/bash wine
