@@ -33,13 +33,8 @@ RUN dpkg --add-architecture i386 && \
     apt-get install -y --no-install-recommends software-properties-common && \
     apt-get install -y --no-install-recommends unzip wget gpg-agent apt-transport-https && \
 
-    # Add the wine repo
-    wget -qO - https://dl.winehq.org/wine-builds/winehq.key | apt-key add - && \
-    apt-add-repository 'deb https://dl.winehq.org/wine-builds/ubuntu/ bionic main' && \
-    apt-get update && \
-
     # Installation of wine, winetricks and temporary xvfb
-    apt-get install -y --install-recommends winehq-stable && \
+    apt-get install -y --install-recommends wine && \
     apt-get install -y --no-install-recommends winetricks xvfb && \
 
     # Installation of winbind to stop ntlm error messages
