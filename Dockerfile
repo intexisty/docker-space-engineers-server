@@ -50,9 +50,10 @@ RUN dpkg --add-architecture i386 && \
 
     # Installation of winetricks tricks as wine user
     su -p -l wine -c winecfg && \
+    su -p -l wine -c 'env WINEPREFIX=$HOME/winedotnet winetricks win7' && \
     su -p -l wine -c 'xvfb-run -a winetricks -q corefonts' && \
     su -p -l wine -c 'xvfb-run -a winetricks -q vcrun2013' && \
-    su -p -l wine -c 'xvfb-run -a winetricks -q dotnet20' ; \
+    su -p -l wine -c 'xvfb-run -a winetricks -q vcrun2017' && \
     su -p -l wine -c 'xvfb-run -a winetricks -q dotnet461' ; \
     su -p -l wine -c 'xvfb-run -a winetricks -q xna40' && \
     su -p -l wine -c 'xvfb-run -a winetricks d3dx9' && \
