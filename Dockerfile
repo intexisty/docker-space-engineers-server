@@ -30,16 +30,21 @@ RUN dpkg --add-architecture i386 && \
     echo "deb http://security.debian.org/debian-security buster/updates main contrib non-free" >> /etc/apt/sources.list && \
     echo "deb http://deb.debian.org/debian buster-updates main contrib non-free" >> /etc/apt/sources.list && \
     echo "deb http://deb.debian.org/debian buster-backports main contrib non-free" >> /etc/apt/sources.list && \
+    #echo "deb http://ppa.launchpad.net/apt-fast/stable/ubuntu bionic main" >> /etc/apt/sources.list && \
+    #echo "deb-src http://ppa.launchpad.net/apt-fast/stable/ubuntu bionic main" >> /etc/apt/sources.list && \
 
     # Updating and upgrading
     apt-get update && \
+    apt-get install -y gpg-agent && \
     apt-get upgrade -y && \
     apt-get install -y gpg-agent && \
     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys A2166B8DE8BDC3367D1901C11EE2FF37CA8DA16B && \
+    echo "deb http://ppa.launchpad.net/apt-fast/stable/ubuntu bionic main" >> /etc/apt/sources.list && \
+    echo "deb-src http://ppa.launchpad.net/apt-fast/stable/ubuntu bionic main" >> /etc/apt/sources.list && \
     apt-get update && \
 
     apt-get install -y --no-install-recommends software-properties-common && \
-    add-apt-repository ppa:apt-fast/stable && \
+#    add-apt-repository ppa:apt-fast/stable && \
     apt-get update &&\
     apt-get -y install apt-fast && \
     apt-fast install -y --no-install-recommends unzip wget gpg-agent apt-transport-https && \
