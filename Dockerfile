@@ -6,7 +6,7 @@
 # Adapted from work done by chipwolf
 # https://github.com/ChipWolf/docker-space-engineers-server
 
-FROM debian
+FROM debian:10.6
 MAINTAINER Aidan J Culley <culley.aidan@gmail.com> 
 
 # Creating the wine user and setting up dedicated non-root environment.
@@ -30,8 +30,6 @@ RUN dpkg --add-architecture i386 && \
     echo "deb http://security.debian.org/debian-security buster/updates main contrib non-free" >> /etc/apt/sources.list && \
     echo "deb http://deb.debian.org/debian buster-updates main contrib non-free" >> /etc/apt/sources.list && \
     echo "deb http://deb.debian.org/debian buster-backports main contrib non-free" >> /etc/apt/sources.list && \
-    #echo "deb http://ppa.launchpad.net/apt-fast/stable/ubuntu bionic main" >> /etc/apt/sources.list && \
-    #echo "deb-src http://ppa.launchpad.net/apt-fast/stable/ubuntu bionic main" >> /etc/apt/sources.list && \
 
     # Updating and upgrading
     apt-get update && \
@@ -44,7 +42,6 @@ RUN dpkg --add-architecture i386 && \
     apt-get update && \
 
     apt-get install -y --no-install-recommends software-properties-common && \
-#    add-apt-repository ppa:apt-fast/stable && \
     apt-get update &&\
     apt-get -y install apt-fast && \
     apt-fast install -y --no-install-recommends unzip wget gpg-agent apt-transport-https && \
